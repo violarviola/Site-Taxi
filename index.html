@@ -18,7 +18,6 @@
       --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
       --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
       --text-hero: clamp(3.25rem, 1rem + 8vw, 8rem);
-
       --space-1: 0.25rem;
       --space-2: 0.5rem;
       --space-3: 0.75rem;
@@ -32,7 +31,6 @@
       --space-20: 5rem;
       --space-24: 6rem;
       --space-32: 8rem;
-
       --color-bg: #f5f2ea;
       --color-surface: #fbf8f2;
       --color-surface-2: #ffffff;
@@ -161,7 +159,7 @@
     .header-actions { display:flex; align-items:center; gap:var(--space-2); }
     .nav-links { display:flex; align-items:center; gap:var(--space-4); }
     .nav-links a { font-size:var(--text-sm); color:var(--color-text-muted); }
-    .nav-links a:hover { color:var(--color-text); }
+    .nav-links a:hover { color:var(--color-text); transform: translateY(-1px); }
     .theme-toggle, .menu-toggle {
       min-width:44px; min-height:44px; border-radius:var(--radius-full); border:1px solid var(--color-border);
       background:var(--color-surface); display:grid; place-items:center;
@@ -279,6 +277,30 @@
     .stat strong { display:block; font-family:var(--font-display); font-size:var(--text-3xl); line-height:1; color:var(--color-primary); }
     .stat span { display:block; margin-top:var(--space-3); color:var(--color-text-muted); }
 
+    .feedback-grid {
+      display:grid; grid-template-columns: .9fr 1.1fr; gap:var(--space-4);
+    }
+    .feedback-form {
+      display:grid; gap:var(--space-4);
+    }
+    .feedback-form label { font-size:var(--text-sm); font-weight:700; }
+    .feedback-form input,
+    .feedback-form textarea {
+      width:100%; border:1px solid var(--color-border); background:var(--color-surface-2); color:var(--color-text);
+      border-radius:var(--radius-md); padding:var(--space-4); font:inherit;
+    }
+    .feedback-form textarea { resize:vertical; min-height:140px; }
+    .form-note { color:var(--color-text-faint); font-size:var(--text-sm); }
+    .comments-list { display:grid; gap:var(--space-4); margin-top:var(--space-5); }
+    .comment-item {
+      padding:var(--space-4); border-radius:var(--radius-lg); background:var(--color-surface-2); border:1px solid var(--color-border);
+    }
+    .comment-top {
+      display:flex; justify-content:space-between; gap:var(--space-4); margin-bottom:var(--space-2); align-items:center;
+    }
+    .comment-top strong { color:var(--color-text); }
+    .comment-top span { color:var(--color-text-faint); font-size:var(--text-sm); }
+
     .cta-band {
       padding: var(--space-10); border-radius: var(--radius-xl); background: linear-gradient(135deg, var(--color-primary), #ffde78);
       color:#111; display:grid; grid-template-columns: 1.2fr .8fr; gap:var(--space-8); align-items:center;
@@ -303,7 +325,7 @@
     [data-reveal].is-visible { opacity:1; transform:translateY(0); }
 
     @media (max-width: 980px) {
-      .hero-grid, .section-header, .service-grid, .cta-band { grid-template-columns: 1fr; }
+      .hero-grid, .section-header, .service-grid, .cta-band, .feedback-grid { grid-template-columns: 1fr; }
       .story-grid { grid-template-columns: 1fr 1fr; }
       .timeline, .numbers-grid { grid-template-columns: 1fr 1fr; }
       .cta-badges { justify-content:flex-start; }
@@ -320,6 +342,7 @@
       .hero { min-height:auto; }
       .hero-title { max-width: 100%; }
       .header-inner { min-height:4.5rem; }
+      .comment-top { flex-direction:column; align-items:flex-start; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -351,10 +374,10 @@
 
       <nav aria-label="Navegação principal">
         <div class="nav-links" id="nav-links">
-          <a href="#trajeto">Trajeto</a>
-          <a href="#servicos">Serviços</a>
-          <a href="#historia">História</a>
-          <a href="#contato">Contato</a>
+          <a href="#trajeto" data-scroll>Trajeto</a>
+          <a href="#servicos" data-scroll>Serviços</a>
+          <a href="#feedback" data-scroll>Feedback</a>
+          <a href="#contato" data-scroll>Contato</a>
         </div>
       </nav>
 
@@ -377,8 +400,8 @@
           <h1 class="hero-title">O <em>motorista</em> da cidade.</h1>
           <p class="hero-copy">Um site conceitual para um taxista genérico, com narrativa visual forte, seções amplas e presença editorial. A proposta segue a lógica do site do LeBron: blocos marcantes, identidade forte, storytelling e impacto visual baseado em rolagem.[page:1][page:2]</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contato">Chamar corrida</a>
-            <a class="btn btn-secondary" href="#servicos">Ver diferenciais</a>
+            <a class="btn btn-primary" href="#contato" data-scroll>Chamar corrida</a>
+            <a class="btn btn-secondary" href="#servicos" data-scroll>Ver diferenciais</a>
           </div>
         </div>
 
@@ -396,7 +419,7 @@
       </div>
     </section>
 
-    <section class="section" id="trajeto">
+    <section class="section" id="trajeto" tabindex="-1">
       <div class="container">
         <div class="section-header" data-reveal>
           <div>
@@ -426,7 +449,7 @@
       </div>
     </section>
 
-    <section class="section" id="servicos">
+    <section class="section" id="servicos" tabindex="-1">
       <div class="container service-grid">
         <div>
           <div class="section-header" style="grid-template-columns:1fr; margin-bottom:var(--space-6);" data-reveal>
@@ -504,6 +527,52 @@
       </div>
     </section>
 
+    <section class="section" id="feedback" tabindex="-1">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <p class="section-kicker">feedback</p>
+            <h2 class="section-title">Comentários em movimento.</h2>
+          </div>
+          <p class="section-description">A navegação por âncoras com rolagem suave usa `scroll-behavior: smooth` ou `scrollIntoView({ behavior: 'smooth' })`, e esse tipo de transição é um padrão comum para navegação entre seções em páginas longas.[web:37][web:38][web:40]</p>
+        </div>
+
+        <div class="feedback-grid">
+          <form class="card feedback-form" id="comment-form" data-reveal>
+            <span class="card-label">deixe seu relato</span>
+            <h3>Escreva um comentário</h3>
+            <label for="comment-name">Nome</label>
+            <input id="comment-name" name="name" type="text" maxlength="40" placeholder="Seu nome" required>
+            <label for="comment-text">Comentário</label>
+            <textarea id="comment-text" name="comment" rows="6" maxlength="300" placeholder="Como foi sua experiência?" required></textarea>
+            <button class="btn btn-primary" type="submit">Publicar comentário</button>
+            <p class="form-note">Os comentários ficam visíveis durante esta sessão da página.</p>
+          </form>
+
+          <section class="card" data-reveal aria-live="polite" aria-label="Lista de comentários">
+            <span class="card-label">feedback em tempo real</span>
+            <h3>Últimos comentários</h3>
+            <div id="comments-list" class="comments-list">
+              <article class="comment-item">
+                <div class="comment-top">
+                  <strong>Mariana</strong>
+                  <span>Agora há pouco</span>
+                </div>
+                <p>Motorista educado, carro limpo e trajeto muito tranquilo.</p>
+              </article>
+              <article class="comment-item">
+                <div class="comment-top">
+                  <strong>Ricardo</strong>
+                  <span>Hoje</span>
+                </div>
+                <p>Chegou no horário combinado e ajudou com as malas sem eu precisar pedir.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
         <div class="section-header" data-reveal>
@@ -535,18 +604,18 @@
       </div>
     </section>
 
-    <section class="section" id="contato">
+    <section class="section" id="contato" tabindex="-1">
       <div class="container">
         <div class="cta-band" data-reveal>
           <div>
             <h2>Pronto para a próxima corrida.</h2>
-            <p>Este projeto entrega um site único em HTML + CSS + JavaScript, responsivo, com modo claro/escuro, menu móvel e narrativa visual inspirada no ritmo editorial do site do LeBron James.[page:1][page:2]</p>
+            <p>Esta versão voltou ao design e ao código original em arquivo único, mas agora ganhou navegação por “Trajeto”, “Serviços”, “Contato” e “Feedback” com rolagem suave animada entre seções.[web:37][web:38][cite:1]</p>
           </div>
           <div class="cta-badges" aria-label="Diferenciais">
             <span class="badge">Responsivo</span>
-            <span class="badge">Visual premium</span>
+            <span class="badge">Rolagem suave</span>
+            <span class="badge">Feedback ativo</span>
             <span class="badge">Tema claro/escuro</span>
-            <span class="badge">Estrutura em uma página</span>
           </div>
         </div>
       </div>
@@ -566,6 +635,8 @@
       const toggle = document.querySelector('[data-theme-toggle]');
       const menuToggle = document.querySelector('.menu-toggle');
       const nav = document.getElementById('nav-links');
+      const form = document.getElementById('comment-form');
+      const commentsList = document.getElementById('comments-list');
       let currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       root.setAttribute('data-theme', currentTheme);
 
@@ -590,8 +661,16 @@
         nav.classList.toggle('open');
       });
 
-      document.querySelectorAll('a[href^="#"]').forEach((link) => {
-        link.addEventListener('click', () => {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('[data-scroll]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const href = link.getAttribute('href');
+          if (!href || !href.startsWith('#')) return;
+          const target = document.querySelector(href);
+          if (!target) return;
+          event.preventDefault();
+          target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+          target.focus({ preventScroll: true });
           nav.classList.remove('open');
           menuToggle?.setAttribute('aria-expanded', 'false');
         });
@@ -604,6 +683,31 @@
       }, { threshold: 0.16 });
 
       document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+
+      function createComment(name, text) {
+        const article = document.createElement('article');
+        article.className = 'comment-item';
+        article.innerHTML = `
+          <div class="comment-top">
+            <strong></strong>
+            <span>Agora mesmo</span>
+          </div>
+          <p></p>
+        `;
+        article.querySelector('strong').textContent = name;
+        article.querySelector('p').textContent = text;
+        return article;
+      }
+
+      form?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const name = (formData.get('name') || '').toString().trim();
+        const comment = (formData.get('comment') || '').toString().trim();
+        if (!name || !comment) return;
+        commentsList.prepend(createComment(name, comment));
+        form.reset();
+      });
     })();
   </script>
 </body>
