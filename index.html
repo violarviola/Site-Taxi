@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taxista Premium</title>
+  <meta name="description" content="Site conceitual de um taxista genérico com estética editorial inspirada em narrativas visuais de grandes marcas pessoais." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+      --text-hero: clamp(3.25rem, 1rem + 8vw, 8rem);
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+
+      --color-bg: #f5f2ea;
+      --color-surface: #fbf8f2;
+      --color-surface-2: #ffffff;
+      --color-surface-offset: #ece6d8;
+      --color-surface-dynamic: #e0d7c6;
+      --color-divider: #d1c7b7;
+      --color-border: rgba(39, 34, 24, 0.16);
+      --color-text: #17140f;
+      --color-text-muted: #655d4d;
+      --color-text-faint: #9c937f;
+      --color-text-inverse: #fff9ef;
+      --color-primary: #f1b81c;
+      --color-primary-hover: #d39a04;
+      --color-primary-active: #b07c00;
+      --color-primary-highlight: #f5e4ab;
+      --color-blue: #0f1115;
+      --radius-sm: 0.375rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1.25rem;
+      --radius-xl: 1.75rem;
+      --radius-full: 9999px;
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-sm: 0 1px 2px rgba(24,20,12,.05);
+      --shadow-md: 0 10px 30px rgba(24,20,12,.09);
+      --shadow-lg: 0 24px 60px rgba(24,20,12,.14);
+      --content-narrow: 720px;
+      --content-default: 1100px;
+      --content-wide: 1280px;
+      --font-display: 'Oswald', Impact, sans-serif;
+      --font-body: 'Inter', Arial, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #0d0f12;
+      --color-surface: #13161b;
+      --color-surface-2: #181c22;
+      --color-surface-offset: #1f242c;
+      --color-surface-dynamic: #2a3038;
+      --color-divider: #2b3139;
+      --color-border: rgba(255,255,255,0.1);
+      --color-text: #f5efe1;
+      --color-text-muted: #b6ad9b;
+      --color-text-faint: #857d70;
+      --color-text-inverse: #101216;
+      --color-primary: #f2bc2b;
+      --color-primary-hover: #ffd14f;
+      --color-primary-active: #e2aa10;
+      --color-primary-highlight: rgba(242,188,43,.16);
+      --color-blue: #f4efe5;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.2);
+      --shadow-md: 0 12px 36px rgba(0,0,0,.28);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --color-bg: #0d0f12;
+        --color-surface: #13161b;
+        --color-surface-2: #181c22;
+        --color-surface-offset: #1f242c;
+        --color-surface-dynamic: #2a3038;
+        --color-divider: #2b3139;
+        --color-border: rgba(255,255,255,0.1);
+        --color-text: #f5efe1;
+        --color-text-muted: #b6ad9b;
+        --color-text-faint: #857d70;
+        --color-text-inverse: #101216;
+        --color-primary: #f2bc2b;
+        --color-primary-hover: #ffd14f;
+        --color-primary-active: #e2aa10;
+        --color-primary-highlight: rgba(242,188,43,.16);
+        --color-blue: #f4efe5;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      -moz-text-size-adjust: none;
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+    }
+    body {
+      min-height: 100dvh;
+      line-height: 1.6;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right, rgba(242,188,43,0.12), transparent 28%),
+        radial-gradient(circle at left 20%, rgba(242,188,43,0.08), transparent 22%),
+        var(--color-bg);
+    }
+    img, svg { display:block; max-width:100%; height:auto; }
+    a, button { transition: all var(--transition-interactive); }
+    a { color: inherit; text-decoration: none; }
+    button { cursor:pointer; border:none; background:none; color:inherit; }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+    ::selection { background: rgba(242,188,43,.3); }
+    .skip-link {
+      position:absolute; left:var(--space-4); top:-3rem; background:var(--color-primary); color:#111; padding:var(--space-3) var(--space-4); border-radius:var(--radius-full); z-index:100;
+    }
+    .skip-link:focus { top: var(--space-4); }
+    .container { width:min(calc(100% - 2rem), var(--content-wide)); margin-inline:auto; }
+    .narrow { width:min(calc(100% - 2rem), var(--content-narrow)); margin-inline:auto; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 40; backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .header-inner {
+      min-height: 5rem; display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
+    }
+    .brand { display:flex; align-items:center; gap:var(--space-3); }
+    .brand-mark {
+      width: 3rem; height: 3rem; border-radius: 50%; display:grid; place-items:center;
+      color: var(--color-primary); background: var(--color-surface); border:1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .brand-text span { display:block; }
+    .brand-kicker { font-size:var(--text-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-muted); }
+    .brand-name { font-family:var(--font-display); font-size:var(--text-lg); letter-spacing:.04em; }
+    .header-actions { display:flex; align-items:center; gap:var(--space-2); }
+    .nav-links { display:flex; align-items:center; gap:var(--space-4); }
+    .nav-links a { font-size:var(--text-sm); color:var(--color-text-muted); }
+    .nav-links a:hover { color:var(--color-text); }
+    .theme-toggle, .menu-toggle {
+      min-width:44px; min-height:44px; border-radius:var(--radius-full); border:1px solid var(--color-border);
+      background:var(--color-surface); display:grid; place-items:center;
+    }
+    .menu-toggle { display:none; }
+
+    .hero {
+      padding: clamp(var(--space-12), 9vw, var(--space-24)) 0 var(--space-16);
+      min-height: calc(100dvh - 5rem);
+      display:grid; align-items:end;
+    }
+    .hero-grid {
+      display:grid; grid-template-columns: 1.2fr .8fr; gap: var(--space-8); align-items:end;
+    }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:var(--space-2); padding:var(--space-2) var(--space-4);
+      border:1px solid var(--color-border); border-radius:var(--radius-full); background:var(--color-surface);
+      font-size:var(--text-xs); text-transform:uppercase; letter-spacing:.18em; color:var(--color-text-muted);
+      margin-bottom: var(--space-6);
+    }
+    .hero-title {
+      font-family: var(--font-display); font-size: var(--text-hero); line-height: .92; text-transform:uppercase; max-width: 8ch;
+    }
+    .hero-title em { color:var(--color-primary); font-style:normal; }
+    .hero-copy { margin-top: var(--space-6); max-width: 58ch; color: var(--color-text-muted); }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-8); }
+    .btn {
+      min-height: 48px; display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
+      padding: 0 var(--space-5); border-radius:var(--radius-full); border:1px solid transparent; font-size:var(--text-sm); font-weight:700;
+    }
+    .btn-primary { background:var(--color-primary); color:#111; box-shadow:var(--shadow-md); }
+    .btn-primary:hover { background:var(--color-primary-hover); transform: translateY(-1px); }
+    .btn-secondary { background:transparent; border-color:var(--color-border); color:var(--color-text); }
+    .btn-secondary:hover { background:var(--color-surface); }
+
+    .hero-panel {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 74%, transparent), var(--color-surface-2));
+      border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-6); box-shadow:var(--shadow-lg);
+      position:relative; overflow:hidden;
+    }
+    .hero-panel::after {
+      content:""; position:absolute; inset:auto -10% -20% auto; width:240px; height:240px; border-radius:50%;
+      background: radial-gradient(circle, rgba(242,188,43,.28), transparent 64%);
+      pointer-events:none;
+    }
+    .meter {
+      display:flex; align-items:flex-end; justify-content:space-between; gap:var(--space-3); margin-top:var(--space-6);
+    }
+    .meter-bar {
+      flex:1; border-radius:var(--radius-full); background:linear-gradient(180deg, var(--color-primary), rgba(242,188,43,.25)); min-height:80px;
+    }
+    .meter-bar:nth-child(2) { min-height:140px; }
+    .meter-bar:nth-child(3) { min-height:190px; }
+    .meter-bar:nth-child(4) { min-height:120px; }
+    .panel-label { font-size:var(--text-xs); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-muted); }
+    .panel-title { font-family:var(--font-display); font-size:var(--text-2xl); text-transform:uppercase; line-height:1; margin-top:var(--space-3); }
+    .panel-copy { margin-top:var(--space-4); color:var(--color-text-muted); }
+
+    .section { padding: clamp(var(--space-12), 8vw, var(--space-24)) 0; }
+    .section-header { display:grid; grid-template-columns: .75fr 1.25fr; gap:var(--space-8); margin-bottom:var(--space-10); }
+    .section-kicker { font-size:var(--text-xs); letter-spacing:.2em; text-transform:uppercase; color:var(--color-primary); }
+    .section-title { font-family:var(--font-display); font-size:var(--text-3xl); line-height:.95; text-transform:uppercase; margin-top:var(--space-3); }
+    .section-description { color:var(--color-text-muted); align-self:end; max-width:58ch; }
+
+    .story-grid, .service-grid, .numbers-grid, .timeline {
+      display:grid; gap:var(--space-4);
+    }
+    .story-grid { grid-template-columns: repeat(3, 1fr); }
+    .card {
+      background: var(--color-surface);
+      border:1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      content-visibility:auto;
+    }
+    .card-label { font-size:var(--text-xs); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-faint); }
+    .card h3 { font-family:var(--font-display); font-size:var(--text-xl); line-height:1; text-transform:uppercase; margin:var(--space-4) 0 var(--space-3); }
+    .card p { color:var(--color-text-muted); }
+
+    .service-grid { grid-template-columns: 1.1fr .9fr; }
+    .feature-stack { display:grid; gap:var(--space-4); }
+    .feature {
+      display:flex; gap:var(--space-4); align-items:flex-start; padding:var(--space-5); border-radius:var(--radius-lg);
+      background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+      border:1px solid var(--color-border);
+    }
+    .feature-index {
+      width:48px; height:48px; border-radius:50%; background:var(--color-primary); color:#111; display:grid; place-items:center; font-weight:800; flex:0 0 auto;
+    }
+    .feature h3 { font-size:var(--text-lg); margin-bottom:var(--space-2); }
+    .feature p { color:var(--color-text-muted); }
+
+    .quote-block {
+      min-height:100%; background:linear-gradient(180deg, var(--color-surface), var(--color-surface-offset));
+      border-radius:var(--radius-xl); border:1px solid var(--color-border); padding:var(--space-8); display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .quote-block blockquote { font-family:var(--font-display); font-size:var(--text-2xl); line-height:1; text-transform:uppercase; }
+    .quote-block p { color:var(--color-text-muted); margin-top:var(--space-6); }
+
+    .timeline { grid-template-columns: repeat(4, 1fr); }
+    .timeline-item {
+      position:relative; padding:var(--space-6); border-top:2px solid var(--color-primary); background:var(--color-surface-2);
+      border-radius:0 0 var(--radius-lg) var(--radius-lg); border-inline:1px solid var(--color-border); border-bottom:1px solid var(--color-border);
+    }
+    .timeline-year { font-size:var(--text-sm); color:var(--color-primary); font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .timeline-item h3 { font-family:var(--font-display); font-size:var(--text-xl); line-height:1; margin:var(--space-4) 0 var(--space-3); text-transform:uppercase; }
+    .timeline-item p { color:var(--color-text-muted); }
+
+    .numbers-grid { grid-template-columns: repeat(4, 1fr); }
+    .stat {
+      padding:var(--space-6); border-radius:var(--radius-xl); background:var(--color-surface);
+      border:1px solid var(--color-border);
+    }
+    .stat strong { display:block; font-family:var(--font-display); font-size:var(--text-3xl); line-height:1; color:var(--color-primary); }
+    .stat span { display:block; margin-top:var(--space-3); color:var(--color-text-muted); }
+
+    .cta-band {
+      padding: var(--space-10); border-radius: var(--radius-xl); background: linear-gradient(135deg, var(--color-primary), #ffde78);
+      color:#111; display:grid; grid-template-columns: 1.2fr .8fr; gap:var(--space-8); align-items:center;
+      box-shadow: var(--shadow-lg);
+    }
+    .cta-band h2 { font-family:var(--font-display); font-size:var(--text-3xl); text-transform:uppercase; line-height:.95; }
+    .cta-band p { max-width:48ch; }
+    .cta-badges { display:flex; flex-wrap:wrap; gap:var(--space-3); justify-content:flex-end; }
+    .badge {
+      padding:var(--space-3) var(--space-4); border-radius:var(--radius-full); background:rgba(17,17,17,.08); border:1px solid rgba(17,17,17,.14);
+      font-size:var(--text-sm); font-weight:700;
+    }
+
+    .site-footer {
+      border-top:1px solid var(--color-border); padding:var(--space-8) 0 var(--space-12); color:var(--color-text-muted);
+    }
+    .footer-inner { display:flex; justify-content:space-between; gap:var(--space-4); align-items:center; flex-wrap:wrap; }
+
+    [data-reveal] {
+      opacity:0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease;
+    }
+    [data-reveal].is-visible { opacity:1; transform:translateY(0); }
+
+    @media (max-width: 980px) {
+      .hero-grid, .section-header, .service-grid, .cta-band { grid-template-columns: 1fr; }
+      .story-grid { grid-template-columns: 1fr 1fr; }
+      .timeline, .numbers-grid { grid-template-columns: 1fr 1fr; }
+      .cta-badges { justify-content:flex-start; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        position:absolute; top:100%; left:0; right:0; display:none; flex-direction:column; align-items:flex-start;
+        padding:var(--space-5); background:var(--color-surface); border-bottom:1px solid var(--color-border);
+      }
+      .nav-links.open { display:flex; }
+      .menu-toggle { display:grid; }
+      .story-grid, .timeline, .numbers-grid { grid-template-columns: 1fr; }
+      .hero { min-height:auto; }
+      .hero-title { max-width: 100%; }
+      .header-inner { min-height:4.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+      [data-reveal] { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#topo" aria-label="Ir para o topo">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logotipo do taxista">
+            <path d="M10 28H38L34 17H14L10 28Z" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
+            <path d="M18 17L22 11H26L30 17" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="31.5" r="3.5" fill="currentColor"/>
+            <circle cx="32" cy="31.5" r="3.5" fill="currentColor"/>
+            <path d="M19 24H29" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-kicker">serviço urbano</span>
+          <span class="brand-name">Taxista Premium</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegação principal">
+        <div class="nav-links" id="nav-links">
+          <a href="#trajeto">Trajeto</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#historia">História</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <button class="theme-toggle" data-theme-toggle aria-label="Alternar tema">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero container" id="topo">
+      <div class="hero-grid">
+        <div data-reveal>
+          <span class="eyebrow">24 horas · cidade inteira · corrida segura</span>
+          <h1 class="hero-title">O <em>motorista</em> da cidade.</h1>
+          <p class="hero-copy">Um site conceitual para um taxista genérico, com narrativa visual forte, seções amplas e presença editorial. A proposta segue a lógica do site do LeBron: blocos marcantes, identidade forte, storytelling e impacto visual baseado em rolagem.[page:1][page:2]</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contato">Chamar corrida</a>
+            <a class="btn btn-secondary" href="#servicos">Ver diferenciais</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" data-reveal aria-label="Painel de desempenho">
+          <span class="panel-label">Presença urbana</span>
+          <h2 class="panel-title">Pontual. Elegante. Disponível.</h2>
+          <p class="panel-copy">Inspirado na abordagem “scroll maze” descrita pela Ethode, este layout combina blocos editoriais, contraste alto e uma identidade visual cinematográfica para valorizar um profissional comum como se fosse uma marca pessoal.[page:2]</p>
+          <div class="meter" aria-hidden="true">
+            <div class="meter-bar"></div>
+            <div class="meter-bar"></div>
+            <div class="meter-bar"></div>
+            <div class="meter-bar"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="trajeto">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <p class="section-kicker">o trajeto</p>
+            <h2 class="section-title">Mais que corrida, presença.</h2>
+          </div>
+          <p class="section-description">O site original usa capítulos para apresentar diferentes dimensões de uma mesma persona, como filantropo, empresário, homem e atleta. Aqui, essa lógica foi adaptada para mostrar rotina, atendimento e reputação de um taxista em formato premium.[page:1]</p>
+        </div>
+
+        <div class="story-grid">
+          <article class="card" data-reveal>
+            <span class="card-label">01 · início cedo</span>
+            <h3>Ponto aberto</h3>
+            <p>Do aeroporto ao centro, o motorista acompanha o ritmo da cidade e transforma deslocamento em experiência organizada, calma e confiável.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="card-label">02 · atenção real</span>
+            <h3>Leitura do cliente</h3>
+            <p>Silêncio quando a pessoa quer descansar, conversa quando o momento pede acolhimento, rota limpa quando o relógio aperta.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="card-label">03 · fim de noite</span>
+            <h3>Última corrida</h3>
+            <p>Segurança, previsibilidade e presença constante para quem precisa voltar para casa com tranquilidade a qualquer hora.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicos">
+      <div class="container service-grid">
+        <div>
+          <div class="section-header" style="grid-template-columns:1fr; margin-bottom:var(--space-6);" data-reveal>
+            <div>
+              <p class="section-kicker">serviços</p>
+              <h2 class="section-title">Atendimento em alto padrão.</h2>
+            </div>
+          </div>
+          <div class="feature-stack">
+            <div class="feature" data-reveal>
+              <div class="feature-index">01</div>
+              <div>
+                <h3>Transfer e agendamento</h3>
+                <p>Corridas programadas para aeroporto, rodoviária, reuniões e compromissos recorrentes com confirmação antecipada.</p>
+              </div>
+            </div>
+            <div class="feature" data-reveal>
+              <div class="feature-index">02</div>
+              <div>
+                <h3>Pagamento flexível</h3>
+                <p>Dinheiro, cartão e PIX, com comprovante e atendimento pensado para passageiros locais e visitantes.</p>
+              </div>
+            </div>
+            <div class="feature" data-reveal>
+              <div class="feature-index">03</div>
+              <div>
+                <h3>Viagens urbanas e intermunicipais</h3>
+                <p>Trajetos curtos, rotas corporativas e deslocamentos planejados com foco em conforto, tempo e confiança.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="quote-block" data-reveal>
+          <blockquote>“Cada passageiro entra com pressa. Sai com confiança.”</blockquote>
+          <div>
+            <p>O visual aqui aposta em tipografia pesada, seções amplas e contraste dourado sobre fundo escuro, traduzindo a força de presença observada no site de referência sem copiar sua identidade literal.[page:1][page:2]</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="historia">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <p class="section-kicker">história</p>
+            <h2 class="section-title">Capítulos do volante.</h2>
+          </div>
+          <p class="section-description">A referência organiza a vida de LeBron em etapas e personas distintas. Esta adaptação usa uma linha do tempo simples para dar ao taxista o mesmo senso de trajetória e construção de reputação.[page:1]</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item" data-reveal>
+            <span class="timeline-year">2012</span>
+            <h3>Primeira praça</h3>
+            <p>Início no serviço urbano, aprendendo fluxo, horários críticos e comportamento da cidade em movimento.</p>
+          </article>
+          <article class="timeline-item" data-reveal>
+            <span class="timeline-year">2016</span>
+            <h3>Cliente fiel</h3>
+            <p>Construção de uma base recorrente com passageiros que valorizam pontualidade, discrição e previsibilidade.</p>
+          </article>
+          <article class="timeline-item" data-reveal>
+            <span class="timeline-year">2020</span>
+            <h3>Nova rotina</h3>
+            <p>Adaptação de protocolos, higienização reforçada e foco em transporte essencial em momentos sensíveis.</p>
+          </article>
+          <article class="timeline-item" data-reveal>
+            <span class="timeline-year">Hoje</span>
+            <h3>Marca pessoal</h3>
+            <p>Do simples deslocamento a um serviço reconhecido por consistência, imagem profissional e presença digital.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div>
+            <p class="section-kicker">números</p>
+            <h2 class="section-title">Rotina que move a cidade.</h2>
+          </div>
+          <p class="section-description">Os indicadores abaixo são ilustrativos e servem para reforçar a linguagem de autoridade visual, algo central na forma como o site de referência apresenta amplitude e relevância da marca pessoal.[page:1]</p>
+        </div>
+
+        <div class="numbers-grid">
+          <div class="stat" data-reveal>
+            <strong>12h</strong>
+            <span>de disponibilidade média por dia.</span>
+          </div>
+          <div class="stat" data-reveal>
+            <strong>5★</strong>
+            <span>na percepção de cuidado e cordialidade.</span>
+          </div>
+          <div class="stat" data-reveal>
+            <strong>+900</strong>
+            <span>trajetos urbanos ao longo do ano.</span>
+          </div>
+          <div class="stat" data-reveal>
+            <strong>24/7</strong>
+            <span>atendimento sob agendamento.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <div>
+            <h2>Pronto para a próxima corrida.</h2>
+            <p>Este projeto entrega um site único em HTML + CSS + JavaScript, responsivo, com modo claro/escuro, menu móvel e narrativa visual inspirada no ritmo editorial do site do LeBron James.[page:1][page:2]</p>
+          </div>
+          <div class="cta-badges" aria-label="Diferenciais">
+            <span class="badge">Responsivo</span>
+            <span class="badge">Visual premium</span>
+            <span class="badge">Tema claro/escuro</span>
+            <span class="badge">Estrutura em uma página</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Site conceitual para taxista genérico.</p>
+      <p>Inspirado na lógica narrativa e visual do projeto LeBronJames.com.[page:1][page:2]</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('nav-links');
+      let currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', currentTheme);
+
+      function renderIcon() {
+        if (!toggle) return;
+        toggle.setAttribute('aria-label', currentTheme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro');
+        toggle.innerHTML = currentTheme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      }
+      renderIcon();
+
+      toggle?.addEventListener('click', () => {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', currentTheme);
+        renderIcon();
+      });
+
+      menuToggle?.addEventListener('click', () => {
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('open');
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          menuToggle?.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      }, { threshold: 0.16 });
+
+      document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
